@@ -1,3 +1,6 @@
+# CurrencyExchange-Backend
+Aplikacja w frameworku Django - pobiera wybrane kursy i udostępnia endpoint z danymi. Cashowanie widoku na 60sek oraz odpytywanie API co 60 sekund. Wykorzystano Redis do wykonywania tasków.
+
 **Pobranie kodu źródłowego**
 
 git clone https://github.com/KennyDaktyl/CurrencyExchange-Backend.git
@@ -8,7 +11,7 @@ git clone https://github.com/KennyDaktyl/CurrencyExchange-Backend.git
 
 **Utworzenie superuzytkownika dla korzystania z django-admin**
  - docker exec -it rekrutacja-web-1 bash
-    w dockerze: python manage.py createsuperuser
+ - python manage.py createsuperuser
 
 
 **Uruchomienie lokalnie:**
