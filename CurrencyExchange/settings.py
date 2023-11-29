@@ -1,5 +1,4 @@
 import os
-import logging
 
 from pathlib import Path
 
@@ -67,9 +66,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "CurrencyExchange.wsgi.application"
 
-# REDIS_BASE_URL = os.environ.get('REDIS_URL', 'redis://127.0.0.1:6379/')
-
-REDIS_BASE_URL = os.environ.get('REDIS_URL', 'redis://rekrutacja-redis-1:6379/')
+REDIS_BASE_URL = os.environ.get('REDIS_URL', 'redis://127.0.0.1:6379/')
 
 CACHES = {
    'default': {
@@ -81,8 +78,8 @@ CACHES = {
    }
 }
 
-CELERY_BROKER_URL = REDIS_BASE_URL + "0"
-CELERY_RESULT_BACKEND = REDIS_BASE_URL + "0"
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL', 'redis://127.0.0.1:6379/')
+CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND', 'redis://127.0.0.1:6379/')
 CELERY_REDIRECT_STDOUTS_LEVEL = 'INFO'
 
 DATABASES = {
@@ -123,31 +120,3 @@ TIME_FORMAT = "H:i:s"
 STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-LOGGING_DIR = os.path.join(BASE_DIR, 'logs')
-if not os.path.exists(LOGGING_DIR):
-    os.makedirs(LOGGING_DIR)
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'INFO',  
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(LOGGING_DIR, 'django.log'),
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'INFO', 
-            'propagate': False,
-        },
-        'celery': {
-            'handlers': ['file'],
-            'level': 'DEBUG', 
-            'propagate': False,  
-        },
-    },
-}
