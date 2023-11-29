@@ -76,7 +76,7 @@ services:
     depends_on:
       - db
       - redis
-    command: ["sh", "-c", "chmod 777 /app/logs/django.log && celery -A CurrencyExchange worker -l info"]
+    command: ["sh", "-c", "celery -A CurrencyExchange worker -l info"]
     networks:
       - mynetwork
 
