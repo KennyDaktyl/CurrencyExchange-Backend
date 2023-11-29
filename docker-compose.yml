@@ -1,0 +1,81 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=exchange_rate
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "exchange_rate", "-U", "postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build: .
+    environment:
+      - SECRET_KEY=django-insecure-7x9o75r3+^eovnuz$y(yzru2_ul$4qso+!t#)7lopx6n4xak0o
+      - POSTGRES_DB=exchange_rate
+      - DB_USER=postgres
+      - DB_PASSWORD=password
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DJANGO_SETTINGS_MODULE=CurrencyExchange.settings
+      - REDIS_URL=redis://rekrutacja-redis-1:6379/
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8000"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    command: ["sh", "-c", "sleep 10 && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
+
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6380:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  worker:
+    build: .
+    environment:
+      - SECRET_KEY=django-insecure-7x9o75r3+^eovnuz$y(yzru2_ul$4qso+!t#)7lopx6n4xak0o
+      - POSTGRES_DB=exchange_rate
+      - DB_USER=postgres
+      - DB_PASSWORD=password
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DJANGO_SETTINGS_MODULE=CurrencyExchange.settings
+    depends_on:
+      - db
+      - redis
+    command: ["sh", "-c", "chmod 777 /app/logs/django.log && celery -A CurrencyExchange worker -l info"]
+
+  beat:
+    build: .
+    environment:
+      - SECRET_KEY=django-insecure-7x9o75r3+^eovnuz$y(yzru2_ul$4qso+!t#)7lopx6n4xak0o
+      - POSTGRES_DB=exchange_rate
+      - DB_USER=postgres
+      - DB_PASSWORD=password
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DJANGO_SETTINGS_MODULE=CurrencyExchange.settings
+    depends_on:
+      - db
+      - redis
+    command: ["celery", "-A", "CurrencyExchange", "beat", "-l", "info"]
