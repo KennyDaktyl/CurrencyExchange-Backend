@@ -7,12 +7,15 @@ git clone https://github.com/KennyDaktyl/CurrencyExchange-Backend.git
 
 **Uruchomienie przez docker-compose:**
  - docker-compose up --build
- - docker-compose restart
+ - docker-compose down (aby usunąć kontenery)
 
 **Utworzenie superuzytkownika dla korzystania z django-admin**
  - docker exec -it currencyexchange-web-1 bash
  - python manage.py createsuperuser
 
+**testy**
+ - docker exec -it currencyexchange-web-1 bash
+ - python manage.py test
 
 **Uruchomienie lokalnie:**
     - utworzyć baze danych w postgres
@@ -37,6 +40,12 @@ git clone https://github.com/KennyDaktyl/CurrencyExchange-Backend.git
     - python manage.py migrate
     - python manage.py runserver
 
+**testy**
+ - docker exec -it currencyexchange-web-1 bash
+ - python manage.py test
+
+
+**Uruchamiamy koniecznie beat i worker do wykonywania cyklicznych zapytań o kursy walut**
 
 **Otwieramy terminal i przechodzimy do katalogu z projektem**
 - source env/bin/activate
