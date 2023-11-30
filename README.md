@@ -18,10 +18,10 @@ git clone https://github.com/KennyDaktyl/CurrencyExchange-Backend.git
  - python manage.py test
 
 **Uruchomienie lokalnie:**
-    - utworzyć baze danych w postgres
-        - psql -U postgres -h localhost
-        - create database NAZWA BAZY;
-        - q\
+  - utworzyć baze danych w postgres
+    - psql -U postgres -h localhost
+    - create database NAZWA BAZY;
+    - q\
 - virtualenv -p python3 env  (utworzenie środowiska python)
 - source env/bin/activate
 - cd env
@@ -41,7 +41,6 @@ git clone https://github.com/KennyDaktyl/CurrencyExchange-Backend.git
     - python manage.py runserver
 
 **testy**
- - docker exec -it currencyexchange-web-1 bash
  - python manage.py test
 
 
