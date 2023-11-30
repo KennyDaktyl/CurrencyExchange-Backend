@@ -10,7 +10,7 @@ git clone https://github.com/KennyDaktyl/CurrencyExchange-Backend.git
  - docker-compose restart
 
 **Utworzenie superuzytkownika dla korzystania z django-admin**
- - docker exec -it rekrutacja-web-1 bash
+ - docker exec -it currencyexchange-web-1 bash
  - python manage.py createsuperuser
 
 
