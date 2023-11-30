@@ -29,13 +29,14 @@ git clone https://github.com/KennyDaktyl/CurrencyExchange-Backend.git
 - sudo vi export.txt
 
 **Wymagane pola w pliku export.txt:**
-    - export SECRET_KEY="Jakis secret key wygenerowany dla django"
-    - export POSTGRES_DB= NAZWA BAZY UTWORZONEJ W PSQL
-    - export DB_USER= NAZWA URZYTKOWNIKA W PSQL
-    - export DB_PASSWORD= HASŁO DO PSQL
-    - export DB_HOST="127.0.0.1"
-    - export REDIS_URL="redis://127.0.0.1:6379/"
+- export SECRET_KEY="Jakis secret key wygenerowany dla django"
+- export POSTGRES_DB= NAZWA BAZY UTWORZONEJ W PSQL
+- export DB_USER= NAZWA URZYTKOWNIKA W PSQL
+- export DB_PASSWORD= HASŁO DO PSQL
+- export DB_HOST="127.0.0.1"
+- export REDIS_URL="redis://127.0.0.1:6379/"
 
+**Zapisujemy plik**
 - cd ..
 - source /env/export.txt
 - python manage.py migrate
