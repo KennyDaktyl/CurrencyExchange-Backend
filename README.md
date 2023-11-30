@@ -28,12 +28,12 @@ git clone https://github.com/KennyDaktyl/CurrencyExchange-Backend.git
 - touch export.txt (Tworzymy zmienne środowiskowe)
 
 **Wymagane pola:**
- - export SECRET_KEY="Jakis secret key wygenerowany dla django"\n
- - export POSTGRES_DB= NAZWA BAZY UTWORZONEJ W PSQL\n
- - export DB_USER= NAZWA URZYTKOWNIKA W PSQL\n
- - export DB_PASSWORD= HASŁO DO PSQL\n
- - export DB_HOST="127.0.0.1"\n
- - export REDIS_URL="redis://127.0.0.1:6379/"\n
+    - export SECRET_KEY="Jakis secret key wygenerowany dla django"\n
+    - export POSTGRES_DB= NAZWA BAZY UTWORZONEJ W PSQL\n
+    - export DB_USER= NAZWA URZYTKOWNIKA W PSQL\n
+    - export DB_PASSWORD= HASŁO DO PSQL\n
+    - export DB_HOST="127.0.0.1"\n
+    - export REDIS_URL="redis://127.0.0.1:6379/"\n
 
     - cd ..
     - source /env/export.txt
