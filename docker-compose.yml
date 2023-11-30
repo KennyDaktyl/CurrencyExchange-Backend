@@ -74,9 +74,10 @@ services:
       - CELERY_BROKER_URL=redis://redis:6379/
       - CELERY_RESULT_BACKEND=redis://redis:6379/
     depends_on:
+      - web
       - db
       - redis
-    command: ["sh", "-c", "celery -A CurrencyExchange worker -l info"]
+    command: ["sh", "-c", "sleep 20 && celery -A CurrencyExchange worker -l info"]
     networks:
       - mynetwork
 
@@ -95,6 +96,7 @@ services:
       - CELERY_BROKER_URL=redis://redis:6379/
       - CELERY_RESULT_BACKEND=redis://redis:6379/
     depends_on:
+      - web
       - db
       - redis
     command: ["celery", "-A", "CurrencyExchange", "beat", "-l", "info"]
