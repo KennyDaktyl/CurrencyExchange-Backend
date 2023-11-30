@@ -11,7 +11,7 @@ from .serializers import CurrencyResponseSerializer
 class CurrencyRatesView(APIView):
     renderer_classes = [JSONRenderer]
 
-    @method_decorator(cache_page(15))
+    @method_decorator(cache_page(60))
     def get(self, request):
         currencies = Currency.objects.filter(is_active=True)
         serializer = CurrencyResponseSerializer(currencies, many=True)
