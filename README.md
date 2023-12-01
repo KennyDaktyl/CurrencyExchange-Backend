@@ -39,6 +39,7 @@ git clone https://github.com/KennyDaktyl/CurrencyExchange-Backend.git
 **Zapisujemy plik**
 - cd ..
 - source /env/export.txt
+- pip install -r requirements.txt
 - python manage.py migrate
 - python manage.py runserver
 
